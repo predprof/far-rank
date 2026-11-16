@@ -10,12 +10,17 @@ set of Qwen3-1.7B generations.
 | cbf | 0.0201 | 0.1827 |
 | latest_buy | 0.0277 | 0.2520 |
 | latest_buy_or_sell | 0.0271 | 0.2464 |
+| BPR-MF (team's named baseline) | 0.0268 | 0.2435 |
 | llmrank, provided policy | 0.0201 | 0.1827 |
 | llmrank, repair-and-complete | 0.0205 | 0.1861 |
 
 Re-ranking ceiling (oracle over the same 50 candidates): **0.0492 / 0.4469**.
 Only 6 of 18 relevant assets are in the candidate pool; 5 of 11 labelled users
 have none. Retrieval, not ranking, is the binding constraint on this protocol.
+
+BPR-MF — the baseline the team's registered question names — reaches 54.5% of
+that ceiling; the LLM re-ranker reaches 41.6%. A matrix factorisation trained in
+under a minute beats the 1.7B language model at ordering the same fifty assets.
 
 ## Reproduce
 

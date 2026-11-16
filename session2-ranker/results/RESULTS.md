@@ -8,6 +8,7 @@ Protocol hash (all runs): `50efd4aeb415ba6f0c66dd0793a7c2033cdc32a42b86b58eebbca
 | cbf | 100 | 11 | 0.0201 | 0.1827 |
 | latest_buy | 100 | 11 | 0.0277 | 0.2520 |
 | latest_buy_or_sell | 100 | 11 | 0.0271 | 0.2464 |
+| bpr_mf | 100 | 11 | 0.0268 | 0.2435 |
 | provided_policy | 100 | 11 | 0.0201 | 0.1827 |
 | repair_complete | 100 | 11 | 0.0205 | 0.1861 |
 
