@@ -1,0 +1,23 @@
+{
+  "users": 100,
+  "provided_invalid": 23,
+  "salvaged_any": 99,
+  "fully_salvaged": 77,
+  "salvaged_none": 1,
+  "policies_differ": 22,
+  "salvaged_counts": {
+    "10": 77,
+    "9": 8,
+    "6": 1,
+    "3": 4,
+    "7": 3,
+    "2": 1,
+    "5": 2,
+    "8": 2,
+    "1": 1,
+    "0": 1
+  },
+  "provided_errors": {
+    "ValueError": 23
+  }
+}
