@@ -1,0 +1,57 @@
+{
+  "users": 100,
+  "valid_responses": 84,
+  "fallback_reasons": {
+    "expected exactly ten aliases": 15,
+    "duplicate alias": 1
+  },
+  "total_generation_seconds": 349.731286121998,
+  "total_input_tokens": 96700,
+  "total_output_tokens": 4050,
+  "protocol_hash": "50efd4aeb415ba6f0c66dd0793a7c2033cdc32a42b86b58eebbca3e81eaf3417",
+  "cohorts": {
+    "all": {
+      "users": 100,
+      "users_with_purchases": 11,
+      "scores": {
+        "bpr": 0.02678668904782814,
+        "llm": 0.031300196601058976,
+        "repeat_first": 0.028050772703206796,
+        "llm_delta_vs_bpr": 0.004513507553230836
+      }
+    },
+    "nonempty": {
+      "users": 11,
+      "users_with_purchases": 11,
+      "scores": {
+        "bpr": 0.24351535498025584,
+        "llm": 0.2845472418278089,
+        "repeat_first": 0.2550070245746072,
+        "llm_delta_vs_bpr": 0.041031886847553045
+      }
+    },
+    "sparse": {
+      "users": 54,
+      "users_with_purchases": 1,
+      "scores": {
+        "bpr": 0.007975491816173946,
+        "llm": 0.011683884325397362,
+        "repeat_first": 0.007975491816173946,
+        "llm_delta_vs_bpr": 0.0037083925092234165
+      }
+    },
+    "sparse_nonempty": {
+      "users": 1,
+      "users_with_purchases": 1,
+      "scores": {
+        "bpr": 0.43067655807339306,
+        "llm": 0.6309297535714575,
+        "repeat_first": 0.43067655807339306,
+        "llm_delta_vs_bpr": 0.20025319549806447
+      }
+    }
+  },
+  "llm_changes_to_bpr_top10": 84,
+  "reachable_relevant_pairs": 6,
+  "relevant_pairs": 18
+}
