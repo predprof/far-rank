@@ -1,0 +1,9 @@
+{
+  "users": 100,
+  "nonempty_truth_users": 11,
+  "ceiling_ndcg10_all_users": 0.04915749606264272,
+  "ceiling_ndcg10_nonempty": 0.44688632784220655,
+  "nonempty_users_with_zero_reachable_truth": 5,
+  "total_truth_items_nonempty": 18,
+  "reachable_truth_items_nonempty": 6
+}
