@@ -217,7 +217,8 @@ def main(argv=None):
         if (run_dir / 'generation_meta.json').exists():
             generation_meta[pool_name] = json.loads(
                 (run_dir / 'generation_meta.json').read_text())
-        stats = {'users_generated': 0, 'provided_invalid': 0, 'parse_repaired': 0,
+        stats = {'users_generated': 0, 'generation_failed': 0,
+                 'provided_invalid': 0, 'parse_repaired': 0,
                  'salvaged_any': 0, 'fully_salvaged': 0, 'salvaged_none': 0,
                  'policies_differ': 0, 'llm_equals_control': 0,
                  'salvaged_counts': {}, 'provided_errors': {}}
@@ -236,6 +237,10 @@ def main(argv=None):
             if record is None:
                 continue
             stats['users_generated'] += 1
+            # A context-budget overflow is a generation failure, not a parse
+            # failure: there is no model text to salvage. Counted separately so
+            # the two are never conflated in the report.
+            stats['generation_failed'] += int(bool(record.get('generation_failed')))
             raw = record.get('raw_response')
             try:
                 provided_ranking, repaired = ranker.parse_ranking(raw, set(pool))
@@ -262,8 +267,13 @@ def main(argv=None):
         repair_stats[pool_name] = stats
         coverage[pool_name] = {
             'users_in_cohort': len(users),
-            'users_generated': stats['users_generated'],
+            'users_attempted': stats['users_generated'],
+            'users_with_model_text': stats['users_generated'] - stats['generation_failed'],
+            'context_budget_failures': stats['generation_failed'],
             'generation_complete': stats['users_generated'] == len(users),
+            'valid_only_coverage': (
+                (stats['users_generated'] - stats['generation_failed']
+                 - stats['provided_invalid']) / len(users) if users else None),
         }
 
     timings['scoring_seconds'] = time.perf_counter() - _t0

@@ -150,12 +150,27 @@ def main(argv=None):
         for index, (uid, prompt) in enumerate(prompts, 1):
             if uid in done:
                 continue
-            result = generator.generate(prompt, max_new_tokens=512)
-            record = {'user_id': uid, 'pool': args.pool,
-                      'raw_response': result['text'],
-                      'input_tokens': result['input_tokens'],
-                      'output_tokens': result['output_tokens'],
-                      'seconds': result['seconds']}
+            try:
+                result = generator.generate(prompt, max_new_tokens=512)
+                record = {'user_id': uid, 'pool': args.pool,
+                          'raw_response': result['text'],
+                          'input_tokens': result['input_tokens'],
+                          'output_tokens': result['output_tokens'],
+                          'seconds': result['seconds'],
+                          'generation_failed': False}
+            except ValueError as exc:
+                # The provided runtime enforces a fixed 8192-token budget and
+                # the provided prompt builder does not cap `buy_history_counts`,
+                # so a customer with a long enough history cannot be generated
+                # for at all. That is a property of the provided adaptation, not
+                # of a pool: the same users overflow in every pool, so the
+                # cohort stays matched. Record the failure and keep the user;
+                # dropping them would change the cohort between methods.
+                record = {'user_id': uid, 'pool': args.pool,
+                          'raw_response': None, 'generation_failed': True,
+                          'error': f'{type(exc).__name__}: {exc}'}
+                print(f'  {uid}: generation failed, kept with fallback '
+                      f'({exc})', flush=True)
             fh.write(json.dumps(record, ensure_ascii=False) + '\n')
             fh.flush()
             if index % 10 == 0 or index == len(prompts):

@@ -147,5 +147,34 @@ class RepairPolicy(unittest.TestCase):
             self.assertTrue(set(result) <= set(self.pool))
 
 
+
+class ContextBudgetFailure(unittest.TestCase):
+    """A generation that never happened must degrade to the matched control.
+
+    The provided runtime enforces a fixed 8192-token budget and the provided
+    prompt builder does not cap `buy_history_counts`, so a long-history
+    customer cannot be generated for at all. Such a user is kept in the cohort
+    with a fallback, and must be counted as a generation failure rather than a
+    parse failure: there is no model text to salvage.
+    """
+
+    def setUp(self):
+        self.pool = list(A[:50])
+
+    def test_absent_response_yields_exactly_the_control(self):
+        self.assertEqual(repair_and_complete(None, self.pool), self.pool[:10])
+
+    def test_absent_response_salvages_nothing(self):
+        self.assertEqual(salvage(None, self.pool), [])
+
+    def test_both_policies_agree_when_there_is_no_text(self):
+        """With no text the repaired and provided policies cannot differ."""
+        import evaluate
+        ranker = evaluate.import_provided('ranker', evaluate.LLM_DIR)
+        with self.assertRaises(ValueError):
+            ranker.parse_ranking(None, set(self.pool))
+        self.assertEqual(repair_and_complete(None, self.pool), self.pool[:10])
+
+
 if __name__ == '__main__':
     unittest.main()
