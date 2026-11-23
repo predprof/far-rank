@@ -1,0 +1,49 @@
+{
+  "candidate_count": 50,
+  "cutoff": "2021-06-01",
+  "end_exclusive": "2021-07-01",
+  "excluded_rows": {
+    "reconstructed_initial_position_rows": 38019
+  },
+  "horizon_days": 30,
+  "nonempty_truth_users": 11,
+  "pools": {
+    "cbf": {
+      "ceiling_ndcg10_all_users": 0.049157496062642726,
+      "ceiling_ndcg10_nonempty": 0.4468863278422066,
+      "nonempty_users_with_zero_reachable": 5,
+      "reachable_share": 0.3333333333333333,
+      "reachable_truth_items": 6
+    },
+    "own_freq_then_pop": {
+      "ceiling_ndcg10_all_users": 0.1,
+      "ceiling_ndcg10_nonempty": 0.9090909090909091,
+      "nonempty_users_with_zero_reachable": 1,
+      "reachable_share": 0.9444444444444444,
+      "reachable_truth_items": 17
+    },
+    "own_then_cbf": {
+      "ceiling_ndcg10_all_users": 0.06613147192765459,
+      "ceiling_ndcg10_nonempty": 0.6011951993423144,
+      "nonempty_users_with_zero_reachable": 4,
+      "reachable_share": 0.7222222222222222,
+      "reachable_truth_items": 13
+    },
+    "own_then_pop": {
+      "ceiling_ndcg10_all_users": 0.1,
+      "ceiling_ndcg10_nonempty": 0.9090909090909091,
+      "nonempty_users_with_zero_reachable": 1,
+      "reachable_share": 0.9444444444444444,
+      "reachable_truth_items": 17
+    },
+    "pop": {
+      "ceiling_ndcg10_all_users": 0.1,
+      "ceiling_ndcg10_nonempty": 0.9090909090909091,
+      "nonempty_users_with_zero_reachable": 1,
+      "reachable_share": 0.9444444444444444,
+      "reachable_truth_items": 17
+    }
+  },
+  "total_truth_items_nonempty": 18,
+  "users": 100
+}

@@ -220,3 +220,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# A09: user-level artefacts never belong in the repository.
+# These are all keyed on an anonymised FAR-Trans customer ID.
+outputs/
+data/
+*_per_user.csv
+*_predictions.csv
+pools.json
+responses.jsonl
+prompts.jsonl
+ranker_prompts.jsonl
+generations.jsonl
+generation_cache/
